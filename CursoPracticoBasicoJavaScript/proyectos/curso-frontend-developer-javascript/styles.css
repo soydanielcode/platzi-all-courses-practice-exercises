@@ -165,7 +165,7 @@ nav {
 
 /*Products Select Aside*/
 
-.product-detail {
+aside {
   width: 360px;
   padding: 0 24px;
   box-sizing: border-box;
@@ -301,7 +301,7 @@ nav {
   .desktop-menu {
     display: none;
   }
-  .product-detail {
+  aside {
     width: 100%;
   }
   .cards-container {
