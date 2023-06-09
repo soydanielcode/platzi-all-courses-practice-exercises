@@ -13,7 +13,7 @@ do
         ShowMenuRemove();
     }
     else if ((Menu)menuSelected == Menu.List)
-    {zx
+    {
         ShowMenuList();
     }
 } while ((Menu)menuSelected != Menu.Exit);

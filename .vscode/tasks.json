@@ -1,0 +1,41 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/CursoBuenasPracticasCodigoLimpio/proyecto/curso-codigo-limpio-csharp/ToDo.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publish",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}/CursoBuenasPracticasCodigoLimpio/proyecto/curso-codigo-limpio-csharp/ToDo.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "watch",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "--project",
+                "${workspaceFolder}/CursoBuenasPracticasCodigoLimpio/proyecto/curso-codigo-limpio-csharp/ToDo.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}
