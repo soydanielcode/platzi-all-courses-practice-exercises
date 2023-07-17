@@ -1,0 +1,40 @@
+.itemCard {
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--hospital-green);
+  border: 1px solid var(--dark-green);
+  border-radius: 10px;
+  border-top-width: 0.2em;
+  margin-bottom: 20px;
+  padding: 8px;
+  color: var(--dark-green);
+  margin: 16px 16px;
+  min-width: 500px;
+  max-width: 500px;
+}
+
+.itemCard button {
+  background-color: var(--dark-green);
+  max-height: 20px;
+  max-width: 20px;
+  border: 0px solid transparent;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.itemCard button svg {
+  left: 1rem;
+  width: 1rem;
+  height: 1rem;
+}
+
+.itemCard p {
+    margin: 16px;
+}
+
+.itemCard button:nth-child(1):hover {
+    background-color: red;
+}
