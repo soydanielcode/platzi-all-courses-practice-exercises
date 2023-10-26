@@ -42,8 +42,12 @@ public class UIMenu {
     }
 
     public static void registerUser(){
+        String name = "";
+        String mail = "";
         System.out.println("Insert you Name");
+        name = sc.nextLine();
         System.out.println("Insert you Mail");
+        mail = sc.nextLine();
         //Add list of Doctor Patient or Nurse
     }
 }
