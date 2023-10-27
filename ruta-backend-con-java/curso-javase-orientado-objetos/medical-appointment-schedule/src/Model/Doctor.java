@@ -8,7 +8,7 @@ import java.util.Date;
 public class Doctor extends User {
     private int id;
     private String speciality;
-    private ArrayList<AvailableAppointment>availableAppointments = new ArrayList<>();
+    private final ArrayList<AvailableAppointment>availableAppointments = new ArrayList<>();
 
     public Doctor(String names, String mail, String speciality, String phoneNumber, String birthday) {
         super(names, mail, phoneNumber, birthday);
@@ -87,7 +87,7 @@ public class Doctor extends User {
 
         @Override
         public String toString() {
-            return  "\nDate = " + date.getDate() +
+            return  "\nDate = " + date +
                     "\nTime = '" + time + '\'';
         }
     }

@@ -9,20 +9,20 @@ import java.util.Scanner;
 
 public class UIMenu {
 
-    private static final Scanner scI = new Scanner(System.in);
-    private static final Scanner scS = new Scanner(System.in);
-    private static ArrayList<Doctor>doctors = new ArrayList<>();
-    private static ArrayList<Patient>patients = new ArrayList<>();
-    private static ArrayList<Nurse>nurses = new ArrayList<>();
-    private static Doctor doctorLogged;
-    private static Patient patientLogged;
-    private static Nurse nurseLogged;
+    public static final Scanner scI = new Scanner(System.in);
+    public static final Scanner scS = new Scanner(System.in);
+    public static Doctor doctorLogged;
+    public static Patient patientLogged;
+    public static Nurse nurseLogged;
+    public final static ArrayList<Doctor>doctors = new ArrayList<>();
+    private final static ArrayList<Patient>patients = new ArrayList<>();
+    private final static ArrayList<Nurse>nurses = new ArrayList<>();
     public static void showMenu(){
         System.out.println("Welcome to Medical Appointments Heal.");
         System.out.println("Please, selected one option.");
-        int responseInit = 0;
+        int responseInit;
         do {
-            int responseUser = 0;
+            int responseUser;
             System.out.println("1. Login");
             System.out.println("2. sing in");
             System.out.println("0. Exit");
@@ -39,7 +39,7 @@ public class UIMenu {
                     System.out.println("Thanks for you, see you again.");
                     break;
                 default:
-                    System.out.println("Please Type a selected option.");
+                    System.out.println("Please Type a selected correct option.");
             }
         }while(responseInit != 0);
     }
@@ -54,14 +54,14 @@ public class UIMenu {
     }
 
     public static void registerUser(int response){
-        String name = "";
-        String mail = "";
-        String phoneNumber = "";
-        String birthday = "";
-        String speciality = "";
-        String weight = "";
-        String height = "";
-        String blood = "";
+        String name;
+        String mail;
+        String phoneNumber;
+        String birthday;
+        String speciality;
+        String weight;
+        String height;
+        String blood;
         System.out.println("Insert you Name");
         name = scS.nextLine();
         System.out.println("Insert you Mail");
@@ -103,9 +103,9 @@ public class UIMenu {
     }
 
     public static void authUser(int response){
-        String mail = "";
+        String mail;
         boolean mailCorrect = false;
-
+        doctors.add(new Doctor("daniel", "daniel", "emergencies", "099484233", "23/01/1995"));
         do {
             System.out.println("Please typ your mail");
             mail = scS.nextLine();
@@ -115,8 +115,7 @@ public class UIMenu {
                         if(doc.getMail().equals(mail)){
                             mailCorrect = true;
                             doctorLogged = doc;
-                            System.out.println(doctorLogged);
-                            //code
+                            UIDoctorMenu.showMenuDoctor();
                         }
                     }
                     break;
