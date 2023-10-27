@@ -4,9 +4,8 @@ public class Nurse extends User{
     private int id;
     private String speciality;
 
-    public Nurse(String names, String mail, int id, String speciality) {
-        super(names, mail);
-        this.id = id;
+    public Nurse(String names, String mail, String phoneNumber, String birthday, String speciality) {
+        super(names, mail,phoneNumber, birthday);
         this.speciality = speciality;
     }
 

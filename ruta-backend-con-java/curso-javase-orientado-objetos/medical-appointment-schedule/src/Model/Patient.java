@@ -1,10 +1,17 @@
 package Model;
 
-public class Patient {
+public class Patient extends User{
     private int id;
     private String height;
     private String weight;
     private String blood;
+
+    public Patient(String names, String mail, String height, String weight, String blood, String phoneNumber, String birthday) {
+        super(names, mail, phoneNumber, birthday);
+        this.height = height;
+        this.weight = weight;
+        this.blood = blood;
+    }
 
     public int getId() {
         return id;

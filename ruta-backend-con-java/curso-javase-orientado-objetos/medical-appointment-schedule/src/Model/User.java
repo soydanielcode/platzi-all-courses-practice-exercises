@@ -7,9 +7,11 @@ public abstract class User {
     private String phoneNumber;
     private String birthday;
 
-    public User(String names, String mail) {
+    public User(String names, String mail, String phoneNumber, String birthday) {
         this.names = names;
         this.mail = mail;
+        this.phoneNumber = phoneNumber;
+        this.birthday = birthday;
     }
 
     public int getId() {
