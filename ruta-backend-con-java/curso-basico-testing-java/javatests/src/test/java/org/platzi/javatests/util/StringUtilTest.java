@@ -6,7 +6,7 @@ public class StringUtilTest {
             System.out.println("ok");
         }
         String text1 = StringUtil.repeat("Hola", 3);
-        if (!text1.equals("HolaHolaHola")){
+        if (!text1.equals("HolaHolaHolaBy")){
             System.out.println("Error");
         }
     }
