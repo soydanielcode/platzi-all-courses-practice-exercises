@@ -2,11 +2,12 @@ package UI;
 
 import Model.Doctor;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 
 public class UIDoctorMenu {
     private final static ArrayList<Doctor> availableAppointmentDoctors = new ArrayList<>();
-    public static void showMenuDoctor(){
+    public static void showMenuDoctor() throws ParseException{
         int response;
         do {
             System.out.println("\n");
@@ -31,7 +32,7 @@ public class UIDoctorMenu {
             }
         }while(response!=0);
     }
-    private static void showAddAppointmentAvailableMenu(){
+    private static void showAddAppointmentAvailableMenu() throws ParseException{
         int responseDate;
         int responseTime;
         String date;

@@ -19,7 +19,7 @@ public class Doctor extends User {
         return availableAppointments;
     }
 
-    public void addAvailableAppointments(String date, String time) {
+    public void addAvailableAppointments(String date, String time) throws ParseException {
         this.availableAppointments.add(new Doctor.AvailableAppointment(date, time));
     }
 
@@ -52,12 +52,8 @@ public class Doctor extends User {
         private String time;
         private final SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
-        public AvailableAppointment(String date, String time) {
-            try {
-                this.date = format.parse(date);
-            } catch (ParseException e) {
-                throw new RuntimeException(e);
-            }
+        public AvailableAppointment(String date, String time) throws ParseException {
+            this.date = format.parse(date);
             this.time = time;
         }
 

@@ -4,6 +4,7 @@ import Model.Doctor;
 import Model.Nurse;
 import Model.Patient;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -17,7 +18,7 @@ public class UIMenu {
     public final static ArrayList<Doctor>doctors = new ArrayList<>();
     private final static ArrayList<Patient>patients = new ArrayList<>();
     private final static ArrayList<Nurse>nurses = new ArrayList<>();
-    public static void showMenu(){
+    public static void showMenu() throws ParseException{
         System.out.println("Welcome to Medical Appointments Heal.");
         System.out.println("Please, selected one option.");
         int responseInit;
@@ -53,7 +54,7 @@ public class UIMenu {
         return scI.nextInt();
     }
 
-    public static void registerUser(int response){
+    public static void registerUser(int response) throws ParseException{
         String name;
         String mail;
         String phoneNumber;
@@ -102,12 +103,12 @@ public class UIMenu {
         }
     }
 
-    public static void authUser(int response){
+    public static void authUser(int response) throws ParseException{
         String mail;
         boolean mailCorrect = false;
         doctors.add(new Doctor("daniel", "daniel", "emergencies", "099484233", "23/01/1995"));
         do {
-            System.out.println("Please typ your mail");
+            System.out.println("Please typ your mail or please type 0 to exit");
             mail = scS.nextLine();
             switch (response){
                 case 1:
@@ -116,6 +117,9 @@ public class UIMenu {
                             mailCorrect = true;
                             doctorLogged = doc;
                             UIDoctorMenu.showMenuDoctor();
+                        }
+                        if(mail.equals("0")){
+                            showMenu();
                         }
                     }
                     break;
@@ -126,6 +130,9 @@ public class UIMenu {
                             patientLogged = pat;
                             System.out.println(patientLogged);
                             //code
+                        }
+                        if(mail.equals("0")){
+                            showMenu();
                         }
                     }
                     break;
