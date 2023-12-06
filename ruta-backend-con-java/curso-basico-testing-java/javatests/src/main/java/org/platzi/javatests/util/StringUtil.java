@@ -13,4 +13,10 @@ public class StringUtil {
         }
         return str.repeat(times);
     }
+    public static boolean isEmpty(String srg) {
+        if(srg == null){
+            return true;
+        }
+        return srg.trim().isEmpty();
+    }
 }

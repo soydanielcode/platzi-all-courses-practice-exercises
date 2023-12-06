@@ -3,6 +3,8 @@ package org.platzi.javatests.util;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static org.junit.Assert.*;
+
 public class StringUtilTest {
     @Test
     public void repeat_once_times(){
@@ -21,4 +23,20 @@ public class StringUtilTest {
         StringUtil.repeat("hola", -1);
     }
 
+    @Test
+    public void string_is_empty_with_characters() {
+        assertFalse(StringUtil.isEmpty("string"));
+    }
+    @Test
+    public void string_is_empty_without_characters() {
+        assertTrue(StringUtil.isEmpty(""));
+    }
+    @Test
+    public void string_is_empty_when_is_null() {
+        assertTrue(StringUtil.isEmpty(null));
+    }
+    @Test
+    public void string_is_empty_with_space() {
+        assertTrue(StringUtil.isEmpty("       "));
+    }
 }
