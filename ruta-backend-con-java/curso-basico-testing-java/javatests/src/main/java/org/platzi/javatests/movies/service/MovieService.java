@@ -26,6 +26,27 @@ public class MovieService {
     }
 
     public Collection<Movie> findMoviesByName(String name) {
-        return movieRepository.findAll().stream().filter(movie -> movie.getName().toLowerCase().contains(name.toLowerCase())).collect(Collectors.toList());
+        return movieRepository.findAll().stream()
+                .filter(movie -> movie.getName().toLowerCase()
+                        .contains(name.toLowerCase())).collect(Collectors.toList());
+    }
+
+    public Collection<Movie> findMoviesByTemplate(Movie movieTemplate) {
+        if (movieTemplate.getName() != null && movieTemplate.getMinutes() != null && movieTemplate.getGenre() != null) {
+            return movieRepository.findAll().stream()
+                    .filter(movie -> movie.getName().toLowerCase()
+                            .contains(movieTemplate.getName().toLowerCase()) &&
+                            movie.getMinutes() <= movieTemplate.getMinutes() &&
+                            String.valueOf(movie.getGenre()).contains(String.valueOf(movieTemplate.getGenre())) )
+                    .collect(Collectors.toList());
+        }
+        if (movieTemplate.getGenre() != null && movieTemplate.getMinutes() != null) {
+            return movieRepository.findAll().stream()
+                    .filter(movie -> String.valueOf(movie.getGenre()).toLowerCase()
+                            .contains(String.valueOf(movieTemplate.getGenre()).toLowerCase()) && movie.getMinutes() <= movieTemplate.getMinutes())
+                    .collect(Collectors.toList());
+        } else {
+            return null;
+        }
     }
 }

@@ -29,7 +29,10 @@ public class MovieServiceShould {
                         new Movie(4, "Son como boys", 34, Genre.THRILLER),
                         new Movie(5, "Men in Blacks", 46, Genre.ACTION),
                         new Movie(6, "Vacation in California", 110, Genre.THRILLER),
-                        new Movie(7, "Superman in the Vegas", 120, Genre.ACTION)
+                        new Movie(7, "Superman in the Vegas", 120, Genre.ACTION),
+                        new Movie(8, "Tom and Jerry", 130, Genre.COMEDY),
+                        new Movie(9, "Welcome at Home", 150, Genre.COMEDY),
+                        new Movie(10, "The new people", 150, Genre.COMEDY)
                 )
         );
         movieService = new MovieService(movieRepository);
@@ -54,5 +57,20 @@ public class MovieServiceShould {
         Collection<Movie> movies = movieService.findMoviesByName("AR");
         List<Integer> moviesIds = movies.stream().map(Movie::getId).toList();
         assertThat(moviesIds, CoreMatchers.is(Arrays.asList(1,2,3)));
+    }
+
+    @Test
+    public void return_movies_by_template_all() {
+        Movie movie = new Movie("SUPERMAN", 200, Genre.ACTION);
+        Collection<Movie>movies = movieService.findMoviesByTemplate(movie);
+        List<Integer> moviesIds = movies.stream().map(Movie::getId).toList();
+        assertThat(moviesIds, CoreMatchers.is(Arrays.asList(7)));
+    }
+    @Test
+    public void return_movies_by_template_genre_minutes() {
+        Movie movie = new Movie(null, 150, Genre.COMEDY);
+        Collection<Movie>movies = movieService.findMoviesByTemplate(movie);
+        List<Integer> moviesIds = movies.stream().map(Movie::getId).toList();
+        assertThat(moviesIds, CoreMatchers.is(Arrays.asList(3,8,9,10)));
     }
 }
