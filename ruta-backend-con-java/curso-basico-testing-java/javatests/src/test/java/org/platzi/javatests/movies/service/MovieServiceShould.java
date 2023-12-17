@@ -1,6 +1,7 @@
 package org.platzi.javatests.movies.service;
 
 import org.hamcrest.CoreMatchers;
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.platzi.javatests.movies.data.MovieRepository;
@@ -16,8 +17,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 
 public class MovieServiceShould {
-    @Test
-    public void return_movies_by_genre() {
+    private MovieService movieService;
+    @Before
+    public void setUp() throws Exception {
         MovieRepository movieRepository = Mockito.mock(MovieRepository.class);
         Mockito.when(movieRepository.findAll()).thenReturn(
                 Arrays.asList(
@@ -26,11 +28,22 @@ public class MovieServiceShould {
                         new Movie(3, "Cars", 67, Genre.COMEDY),
                         new Movie(4, "Son como boys", 34, Genre.THRILLER),
                         new Movie(5, "Men in Blacks", 46, Genre.ACTION)
-                        )
+                )
         );
-        MovieService movieService = new MovieService(movieRepository);
+        movieService = new MovieService(movieRepository);
+    }
+
+    @Test
+    public void return_movies_by_genre() {
         Collection<Movie> movies = movieService.findMoviesByGenre(Genre.ACTION);
         List<Integer> movieIds = movies.stream().map(Movie::getId).collect(Collectors.toList());
         assertThat(movieIds, CoreMatchers.is(Arrays.asList(1,5)) );
+    }
+
+    @Test
+    public void return_movies_by_length() {
+        Collection<Movie> movies = movieService.findMoviesByLength(46);
+        List<Integer> movieIds = movies.stream().map(Movie::getId).collect(Collectors.toList());
+        assertThat(movieIds, CoreMatchers.is(Arrays.asList(1,2,4,5)) );
     }
 }
