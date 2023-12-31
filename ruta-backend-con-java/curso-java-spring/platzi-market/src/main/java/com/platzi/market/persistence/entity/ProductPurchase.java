@@ -7,12 +7,8 @@ import java.util.Objects;
 @Entity
 @Table(name = "compras_productos")
 public class ProductPurchase {
-    @Id
-    @GeneratedValue
-    @Column(name = "id_compra")
-    private Integer id;
-    @Column(name = "id_producto")
-    private Integer idProduct;
+    @EmbeddedId
+    private ProductPurchasePk id;
     @Column(name = "cantidad")
     private Integer quantity;
     @Column(name = "total")
@@ -20,20 +16,12 @@ public class ProductPurchase {
     @Column(name = "estado")
     private boolean state;
 
-    public Integer getId() {
+    public ProductPurchasePk getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(ProductPurchasePk id) {
         this.id = id;
-    }
-
-    public Integer getIdProduct() {
-        return idProduct;
-    }
-
-    public void setIdProduct(Integer idProduct) {
-        this.idProduct = idProduct;
     }
 
     public Integer getQuantity() {
@@ -65,19 +53,18 @@ public class ProductPurchase {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProductPurchase that = (ProductPurchase) o;
-        return state == that.state && Objects.equals(id, that.id) && Objects.equals(idProduct, that.idProduct) && Objects.equals(quantity, that.quantity) && Objects.equals(total, that.total);
+        return state == that.state && Objects.equals(id, that.id) && Objects.equals(quantity, that.quantity) && Objects.equals(total, that.total);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, idProduct, quantity, total, state);
+        return Objects.hash(id, quantity, total, state);
     }
 
     @Override
     public String toString() {
         return "ProductPurchase{" +
                 "id=" + id +
-                ", idProduct=" + idProduct +
                 ", quantity=" + quantity +
                 ", total=" + total +
                 ", state=" + state +
