@@ -2,6 +2,7 @@ package com.platzi.market.persistence.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -22,6 +23,9 @@ public class Product {
     private Integer inventoryQuality;
     @Column(name = "estado")
     private boolean state;
+    @ManyToOne
+    @JoinColumn(name = "id_categoria", insertable = false, updatable = false)
+    private Category category;
 
     public Integer getId() {
         return id;

@@ -2,6 +2,7 @@ package com.platzi.market.persistence.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -14,6 +15,8 @@ public class Category {
     private String description;
     @Column(name = "estado")
     private boolean state;
+    @OneToMany(mappedBy = "category")
+    private List<Product>products;
 
     public Integer getId() {
         return id;

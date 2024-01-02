@@ -1,8 +1,10 @@
 package com.platzi.market.persistence.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.mapping.Join;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -22,6 +24,11 @@ public class Purchase {
     private String comment;
     @Column(name = "estado")
     private boolean state;
+    @ManyToOne()
+    @JoinColumn(name = "id_cliente", insertable = false, updatable = false)
+    private Client client;
+    @OneToMany(mappedBy = "purchase")
+    private List<ProductPurchase> products;
 
     public Integer getId() {
         return id;

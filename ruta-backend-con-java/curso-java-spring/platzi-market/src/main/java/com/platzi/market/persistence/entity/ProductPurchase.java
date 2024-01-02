@@ -16,6 +16,13 @@ public class ProductPurchase {
     @Column(name = "estado")
     private boolean state;
 
+    @ManyToOne
+    @JoinColumn(name = "id_compra")
+    private Purchase purchase;
+    @ManyToOne
+    @JoinColumn(name = "id_producto", insertable = false, updatable = false)
+    private Product product;
+
     public ProductPurchasePk getId() {
         return id;
     }
