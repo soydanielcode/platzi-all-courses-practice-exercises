@@ -6,7 +6,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "compras_productos")
-public class ProductPurchase {
+public class ProductPurchaseEntity {
     @EmbeddedId
     private ProductPurchasePk id;
     @Column(name = "cantidad")
@@ -17,11 +17,11 @@ public class ProductPurchase {
     private boolean state;
 
     @ManyToOne
-    @JoinColumn(name = "id_compra")
-    private Purchase purchase;
+    @JoinColumn(name = "id_compra", insertable = false, updatable = false)
+    private PurchaseEntity purchaseEntity;
     @ManyToOne
     @JoinColumn(name = "id_producto", insertable = false, updatable = false)
-    private Product product;
+    private ProductEntity productEntity;
 
     public ProductPurchasePk getId() {
         return id;
@@ -59,22 +59,24 @@ public class ProductPurchase {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ProductPurchase that = (ProductPurchase) o;
-        return state == that.state && Objects.equals(id, that.id) && Objects.equals(quantity, that.quantity) && Objects.equals(total, that.total);
+        ProductPurchaseEntity that = (ProductPurchaseEntity) o;
+        return state == that.state && Objects.equals(id, that.id) && Objects.equals(quantity, that.quantity) && Objects.equals(total, that.total) && Objects.equals(purchaseEntity, that.purchaseEntity) && Objects.equals(productEntity, that.productEntity);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, quantity, total, state);
+        return Objects.hash(id, quantity, total, state, purchaseEntity, productEntity);
     }
 
     @Override
     public String toString() {
-        return "ProductPurchase{" +
+        return "ProductPurchaseEntity{" +
                 "id=" + id +
                 ", quantity=" + quantity +
                 ", total=" + total +
                 ", state=" + state +
+                ", purchaseEntity=" + purchaseEntity +
+                ", productEntity=" + productEntity +
                 '}';
     }
 }

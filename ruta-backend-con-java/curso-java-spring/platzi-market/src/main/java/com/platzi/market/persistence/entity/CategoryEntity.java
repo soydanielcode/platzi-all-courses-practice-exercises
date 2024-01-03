@@ -7,7 +7,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "categorias")
-public class Category {
+public class CategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -15,8 +15,8 @@ public class Category {
     private String description;
     @Column(name = "estado")
     private boolean state;
-    @OneToMany(mappedBy = "category")
-    private List<Product>products;
+    @OneToMany(mappedBy = "categoryEntity")
+    private List<ProductEntity> productEntities;
 
     public Integer getId() {
         return id;
@@ -46,21 +46,22 @@ public class Category {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Category category = (Category) o;
-        return state == category.state && Objects.equals(id, category.id) && Objects.equals(description, category.description);
+        CategoryEntity that = (CategoryEntity) o;
+        return state == that.state && Objects.equals(id, that.id) && Objects.equals(description, that.description) && Objects.equals(productEntities, that.productEntities);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, description, state);
+        return Objects.hash(id, description, state, productEntities);
     }
 
     @Override
     public String toString() {
-        return "Category{" +
+        return "CategoryEntity{" +
                 "id=" + id +
                 ", description='" + description + '\'' +
                 ", state=" + state +
+                ", products=" + productEntities +
                 '}';
     }
 }

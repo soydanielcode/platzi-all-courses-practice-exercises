@@ -2,12 +2,11 @@ package com.platzi.market.persistence.entity;
 
 import jakarta.persistence.*;
 
-import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "productos")
-public class Product {
+public class ProductEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -25,7 +24,7 @@ public class Product {
     private boolean state;
     @ManyToOne
     @JoinColumn(name = "id_categoria", insertable = false, updatable = false)
-    private Category category;
+    private CategoryEntity categoryEntity;
 
     public Integer getId() {
         return id;
@@ -84,8 +83,21 @@ public class Product {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProductEntity that = (ProductEntity) o;
+        return state == that.state && Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(idCategory, that.idCategory) && Objects.equals(barCode, that.barCode) && Objects.equals(salePrice, that.salePrice) && Objects.equals(inventoryQuality, that.inventoryQuality) && Objects.equals(categoryEntity, that.categoryEntity);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, idCategory, barCode, salePrice, inventoryQuality, state, categoryEntity);
+    }
+
+    @Override
     public String toString() {
-        return "Product{" +
+        return "ProductEntity{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", idCategory=" + idCategory +
@@ -93,19 +105,7 @@ public class Product {
                 ", salePrice=" + salePrice +
                 ", inventoryQuality=" + inventoryQuality +
                 ", state=" + state +
+                ", categoryEntity=" + categoryEntity +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Product product = (Product) o;
-        return state == product.state && Objects.equals(id, product.id) && Objects.equals(name, product.name) && Objects.equals(idCategory, product.idCategory) && Objects.equals(barCode, product.barCode) && Objects.equals(salePrice, product.salePrice) && Objects.equals(inventoryQuality, product.inventoryQuality);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, idCategory, barCode, salePrice, inventoryQuality, state);
     }
 }

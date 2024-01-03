@@ -1,7 +1,6 @@
 package com.platzi.market.persistence.entity;
 
 import jakarta.persistence.*;
-import org.hibernate.mapping.Join;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -9,7 +8,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "compras")
-public class Purchase {
+public class PurchaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_compra")
@@ -26,9 +25,9 @@ public class Purchase {
     private boolean state;
     @ManyToOne()
     @JoinColumn(name = "id_cliente", insertable = false, updatable = false)
-    private Client client;
-    @OneToMany(mappedBy = "purchase")
-    private List<ProductPurchase> products;
+    private ClientEntity clientEntity;
+    @OneToMany(mappedBy = "purchaseEntity")
+    private List<ProductPurchaseEntity> products;
 
     public Integer getId() {
         return id;
@@ -82,8 +81,8 @@ public class Purchase {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Purchase purchase = (Purchase) o;
-        return state == purchase.state && Objects.equals(id, purchase.id) && Objects.equals(idClient, purchase.idClient) && Objects.equals(date, purchase.date) && Objects.equals(paymentMeans, purchase.paymentMeans) && Objects.equals(comment, purchase.comment);
+        PurchaseEntity purchaseEntity = (PurchaseEntity) o;
+        return state == purchaseEntity.state && Objects.equals(id, purchaseEntity.id) && Objects.equals(idClient, purchaseEntity.idClient) && Objects.equals(date, purchaseEntity.date) && Objects.equals(paymentMeans, purchaseEntity.paymentMeans) && Objects.equals(comment, purchaseEntity.comment);
     }
 
     @Override

@@ -7,7 +7,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "clientes")
-public class Client {
+public class ClientEntity {
     @Id
     private String id;
     @Column(name = "nombre")
@@ -18,8 +18,8 @@ public class Client {
     private Double cellphone;
     @Column(name = "correo_electronico")
     private String mail;
-    @OneToMany(mappedBy = "client")
-    private List<Purchase>purchases;
+    @OneToMany(mappedBy = "clientEntity")
+    private List<PurchaseEntity> purchaseEntities;
 
     public String getId() {
         return id;
@@ -65,8 +65,8 @@ public class Client {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Client client = (Client) o;
-        return Objects.equals(id, client.id) && Objects.equals(name, client.name) && Objects.equals(lastName, client.lastName) && Objects.equals(cellphone, client.cellphone) && Objects.equals(mail, client.mail);
+        ClientEntity clientEntity = (ClientEntity) o;
+        return Objects.equals(id, clientEntity.id) && Objects.equals(name, clientEntity.name) && Objects.equals(lastName, clientEntity.lastName) && Objects.equals(cellphone, clientEntity.cellphone) && Objects.equals(mail, clientEntity.mail);
     }
 
     @Override
