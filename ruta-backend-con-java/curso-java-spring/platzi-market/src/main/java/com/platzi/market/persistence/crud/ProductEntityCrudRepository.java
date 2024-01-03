@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 import java.util.Optional;
 
-public interface ProductCrudRepository extends CrudRepository<ProductEntity, Integer> {
+public interface ProductEntityCrudRepository extends CrudRepository<ProductEntity, Integer> {
     List<ProductEntity> findByIdCategoryOrderByNameAsc(int idCategory);
     Optional<ProductEntity> findByBarCode(String barCode);
     Optional<List<ProductEntity>> findByInventoryQualityLessThanAndState(int inventoryQuality, boolean state);

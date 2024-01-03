@@ -1,6 +1,5 @@
 package com.platzi.market.persistence.mapper;
 
-import com.platzi.market.domain.Category;
 import com.platzi.market.domain.Product;
 import com.platzi.market.persistence.entity.ProductEntity;
 import org.mapstruct.InheritInverseConfiguration;
@@ -26,5 +25,5 @@ public interface ProductMapper {
 
     @InheritInverseConfiguration
     @Mapping(target = "barcode", ignore = true)
-    ProductEntity toProductEntity(ProductEntity productEntity);
+    ProductEntity toProductEntity(Product product);
 }

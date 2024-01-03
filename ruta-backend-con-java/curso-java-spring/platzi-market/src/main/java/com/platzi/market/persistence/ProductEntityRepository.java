@@ -1,42 +1,56 @@
 package com.platzi.market.persistence;
 
-import com.platzi.market.persistence.crud.ProductCrudRepository;
+import com.platzi.market.domain.Product;
+import com.platzi.market.domain.repostitory.ProductRepository;
+import com.platzi.market.persistence.crud.ProductEntityCrudRepository;
 import com.platzi.market.persistence.entity.ProductEntity;
+import com.platzi.market.persistence.mapper.ProductMapper;
+import org.hibernate.sql.ast.tree.expression.Over;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class ProductEntityRepository {
-    private ProductCrudRepository productCrudRepository;
+public class ProductEntityRepository implements ProductRepository {
+    private ProductEntityCrudRepository productEntityCrudRepository;
+    private ProductMapper productMapper;
 
-    public List<ProductEntity> getAll(){
-        return (List<ProductEntity>) productCrudRepository.findAll();
+    @Override
+    public List<Product> getAll(){
+        return productMapper.toProducts((ProductEntity) productEntityCrudRepository.findAll());
     }
 
-    public List<ProductEntity> getByCategory(int idCategory){
-        return productCrudRepository.findByIdCategoryOrderByNameAsc(idCategory);
+    @Override
+    public List<Product> getByCategory(int idCategory){
+        return productMapper.toProducts((ProductEntity) productEntityCrudRepository.findByIdCategoryOrderByNameAsc(idCategory));
     }
 
-    public Optional<ProductEntity> getProductByBarCode(String barcode){
-        return productCrudRepository.findByBarCode(barcode);
+    @Override
+    public Optional<Product> getProductByBarcode(String barcode) {
+        return productEntityCrudRepository.findByBarCode(barcode).map(productEntity -> productMapper.toProduct(productEntity));
     }
 
-    public Optional<List<ProductEntity>>getShortage(int quality){
-        return productCrudRepository.findByInventoryQualityLessThanAndState(quality,true);
+    @Override
+    public Optional<List<Product>>getShortage(int quality){
+        Optional<List<ProductEntity>>productEntities = productEntityCrudRepository.findByInventoryQualityLessThanAndState(quality, true);
+        return productEntities.map(pEntity -> (List<Product>) productMapper.toProduct((ProductEntity) pEntity));
     }
 
-    public Optional<ProductEntity> getProduct(int id){
-        return productCrudRepository.findById(id);
+    @Override
+    public Optional<Product> getProduct(int id){
+        return productEntityCrudRepository.findById(id).map(productEntity -> productMapper.toProduct(productEntity));
     }
 
-    public ProductEntity save(ProductEntity productEntity){
-        return productCrudRepository.save(productEntity);
+    @Override
+    public Product save(Product product) {
+        ProductEntity productEntity = productMapper.toProductEntity(product);
+        return productMapper.toProduct(productEntity);
     }
 
+    @Override
     public void delete(int idProduct){
-        productCrudRepository.deleteById(idProduct);
+        productEntityCrudRepository.deleteById(idProduct);
     }
 
 }
