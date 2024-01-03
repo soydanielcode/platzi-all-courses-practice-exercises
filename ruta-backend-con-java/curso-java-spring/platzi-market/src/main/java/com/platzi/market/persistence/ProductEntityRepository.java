@@ -6,6 +6,7 @@ import com.platzi.market.persistence.crud.ProductEntityCrudRepository;
 import com.platzi.market.persistence.entity.ProductEntity;
 import com.platzi.market.persistence.mapper.ProductMapper;
 import org.hibernate.sql.ast.tree.expression.Over;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,7 +14,9 @@ import java.util.Optional;
 
 @Repository
 public class ProductEntityRepository implements ProductRepository {
+    @Autowired
     private ProductEntityCrudRepository productEntityCrudRepository;
+    @Autowired
     private ProductMapper productMapper;
 
     @Override
