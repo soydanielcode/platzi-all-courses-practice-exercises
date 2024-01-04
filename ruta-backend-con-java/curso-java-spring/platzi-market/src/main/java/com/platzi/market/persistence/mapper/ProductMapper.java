@@ -9,7 +9,7 @@ import org.mapstruct.Mappings;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = CategoryMapper.class)
+@Mapper(componentModel = "spring", uses = {CategoryMapper.class})
 public interface ProductMapper {
     @Mappings({
             @Mapping(source = "id", target = "id"),
@@ -18,12 +18,12 @@ public interface ProductMapper {
             @Mapping(source = "salePrice", target = "price"),
             @Mapping(source = "inventoryQuality", target = "stock"),
             @Mapping(source = "state", target = "active"),
-            @Mapping(source = "categoryEntity", target = "category"),
+            @Mapping(source = "categoryEntity", target = "category")
     })
     Product toProduct(ProductEntity productEntity);
-    List<Product> toProducts(ProductEntity productEntity);
+    List<Product> toProducts(List<ProductEntity> productEntities);
 
     @InheritInverseConfiguration
-    @Mapping(target = "barcode", ignore = true)
+    @Mapping(target = "barCode", ignore = true)
     ProductEntity toProductEntity(Product product);
 }

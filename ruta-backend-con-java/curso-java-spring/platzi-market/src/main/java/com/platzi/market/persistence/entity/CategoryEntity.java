@@ -10,6 +10,7 @@ import java.util.Objects;
 public class CategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_categoria")
     private Integer id;
     @Column(name = "descripcion")
     private String description;
@@ -40,6 +41,14 @@ public class CategoryEntity {
 
     public void setState(boolean state) {
         this.state = state;
+    }
+
+    public List<ProductEntity> getProductEntities() {
+        return productEntities;
+    }
+
+    public void setProductEntities(List<ProductEntity> productEntities) {
+        this.productEntities = productEntities;
     }
 
     @Override

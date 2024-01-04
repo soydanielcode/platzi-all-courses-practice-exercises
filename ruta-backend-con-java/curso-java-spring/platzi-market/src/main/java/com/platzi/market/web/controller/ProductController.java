@@ -3,8 +3,7 @@ package com.platzi.market.web.controller;
 import com.platzi.market.domain.Product;
 import com.platzi.market.domain.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,31 +14,38 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+    @GetMapping("/all")
     private List<Product> getAll(){
         return productService.getAll();
     }
 
-    private List<Product> getByCategory(int id) {
+    @GetMapping("/category/{id}")
+    private List<Product> getByCategory(@PathVariable("id") int id) {
         return productService.getByCategory(id);
     }
 
-    private Optional<Product> getProductByBarcode(String barcode) {
+    @GetMapping("/barcode/{barcode}")
+    private Optional<Product> getProductByBarcode(@PathVariable("barcode") String barcode) {
         return productService.getProductByBarcode(barcode);
     }
 
-    private Optional<List<Product>> getShortage(int quality) {
+    @GetMapping("/shortage/{quality}")
+    private Optional<List<Product>> getShortage(@PathVariable("quality") int quality) {
         return productService.getShortage(quality);
     }
 
-    private Optional<Product> getProduct(int id) {
+    @GetMapping("/{id}")
+    private Optional<Product> getProduct(@PathVariable("id") int id) {
         return productService.getProduct(id);
     }
 
-    private Product save(Product product) {
+    @PostMapping()
+    private Product save(@RequestBody Product product) {
         return productService.save(product);
     }
 
-    private boolean delete(int id) {
+    @DeleteMapping("/{id}")
+    private boolean delete(@PathVariable("id") int id) {
         return productService.delete(id);
     }
 }

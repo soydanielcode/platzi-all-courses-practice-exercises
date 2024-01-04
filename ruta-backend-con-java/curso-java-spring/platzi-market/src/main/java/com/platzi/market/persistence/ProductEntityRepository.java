@@ -21,12 +21,12 @@ public class ProductEntityRepository implements ProductRepository {
 
     @Override
     public List<Product> getAll(){
-        return productMapper.toProducts((ProductEntity) productEntityCrudRepository.findAll());
+        return productMapper.toProducts((List<ProductEntity>) productEntityCrudRepository.findAll());
     }
 
     @Override
     public List<Product> getByCategory(int idCategory){
-        return productMapper.toProducts((ProductEntity) productEntityCrudRepository.findByIdCategoryOrderByNameAsc(idCategory));
+        return productMapper.toProducts(productEntityCrudRepository.findByIdCategoryOrderByNameAsc(idCategory));
     }
 
     @Override
@@ -36,8 +36,9 @@ public class ProductEntityRepository implements ProductRepository {
 
     @Override
     public Optional<List<Product>>getShortage(int quality){
-        Optional<List<ProductEntity>>productEntities = productEntityCrudRepository.findByInventoryQualityLessThanAndState(quality, true);
-        return productEntities.map(pEntity -> (List<Product>) productMapper.toProduct((ProductEntity) pEntity));
+        Optional<List<Product>> productEntities = productEntityCrudRepository.
+                findByInventoryQualityLessThanAndState(quality, true).map(pEntity -> productMapper.toProducts(pEntity));
+        return productEntities;
     }
 
     @Override
@@ -48,7 +49,7 @@ public class ProductEntityRepository implements ProductRepository {
     @Override
     public Product save(Product product) {
         ProductEntity productEntity = productMapper.toProductEntity(product);
-        return productMapper.toProduct(productEntity);
+        return productMapper.toProduct(productEntityCrudRepository.save(productEntity));
     }
 
     @Override

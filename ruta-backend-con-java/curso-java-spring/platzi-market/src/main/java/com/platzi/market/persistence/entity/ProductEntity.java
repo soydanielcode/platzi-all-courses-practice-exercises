@@ -9,16 +9,17 @@ import java.util.Objects;
 public class ProductEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_producto")
     private Integer id;
     @Column(name = "nombre")
     private String name;
     @Column(name = "id_categoria")
     private Integer idCategory;
-    @Column(name = "codigo_barra")
+    @Column(name = "codigo_barras")
     private String barCode;
     @Column(name = "precio_venta")
     private Double salePrice;
-    @Column(name = "cantidad_sto")
+    @Column(name = "cantidad_stock")
     private Integer inventoryQuality;
     @Column(name = "estado")
     private boolean state;
@@ -80,6 +81,14 @@ public class ProductEntity {
 
     public void setState(boolean state) {
         this.state = state;
+    }
+
+    public CategoryEntity getCategoryEntity() {
+        return categoryEntity;
+    }
+
+    public void setCategoryEntity(CategoryEntity categoryEntity) {
+        this.categoryEntity = categoryEntity;
     }
 
     @Override
