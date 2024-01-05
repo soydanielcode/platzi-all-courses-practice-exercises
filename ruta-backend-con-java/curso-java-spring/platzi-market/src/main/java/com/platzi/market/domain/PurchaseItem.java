@@ -1,17 +1,17 @@
-package com.platzi.market.domain.service;
+package com.platzi.market.domain;
 
 public class PurchaseItem {
-    private int id;
+    private int productId;
     private int quantity;
     private double total;
     private boolean state;
 
-    public int getId() {
-        return id;
+    public int getProductId() {
+        return productId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 
     public int getQuantity() {

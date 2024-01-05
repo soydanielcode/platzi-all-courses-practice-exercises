@@ -22,11 +22,11 @@ public class PurchaseEntity {
     @Column(name = "comentario")
     private String comment;
     @Column(name = "estado")
-    private boolean state;
+    private String state;
     @ManyToOne()
     @JoinColumn(name = "id_cliente", insertable = false, updatable = false)
     private ClientEntity clientEntity;
-    @OneToMany(mappedBy = "purchaseEntity")
+    @OneToMany(mappedBy = "purchaseEntity", cascade = {CascadeType.ALL})
     private List<ProductPurchaseEntity> products;
 
     public Integer getId() {
@@ -69,12 +69,28 @@ public class PurchaseEntity {
         this.comment = comment;
     }
 
-    public boolean isState() {
+    public String getState() {
         return state;
     }
 
-    public void setState(boolean state) {
+    public void setState(String state) {
         this.state = state;
+    }
+
+    public ClientEntity getClientEntity() {
+        return clientEntity;
+    }
+
+    public void setClientEntity(ClientEntity clientEntity) {
+        this.clientEntity = clientEntity;
+    }
+
+    public List<ProductPurchaseEntity> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<ProductPurchaseEntity> products) {
+        this.products = products;
     }
 
     @Override

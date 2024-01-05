@@ -1,6 +1,7 @@
 package com.platzi.market.domain;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class Purchase {
     private int id;
@@ -9,6 +10,7 @@ public class Purchase {
     private String paymentMethod;
     private String comment;
     private String state;
+    private List<PurchaseItem> items;
 
     public int getId() {
         return id;
@@ -56,5 +58,13 @@ public class Purchase {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public List<PurchaseItem> getItems() {
+        return items;
+    }
+
+    public void setItems(List<PurchaseItem> items) {
+        this.items = items;
     }
 }
