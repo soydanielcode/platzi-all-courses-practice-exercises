@@ -11,15 +11,15 @@ public class ProductPurchaseEntity {
     private ProductPurchasePk id;
     @Column(name = "cantidad")
     private Integer quantity;
-    @Column(name = "total")
     private Double total;
     @Column(name = "estado")
     private boolean state;
 
     @ManyToOne
-    @MapsId("id")
+    @MapsId("idPurchase")
     @JoinColumn(name = "id_compra", insertable = false, updatable = false)
     private PurchaseEntity purchaseEntity;
+
     @ManyToOne
     @JoinColumn(name = "id_producto", insertable = false, updatable = false)
     private ProductEntity productEntity;

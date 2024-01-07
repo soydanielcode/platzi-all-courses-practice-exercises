@@ -12,7 +12,7 @@ public class PurchaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_compra")
-    private Integer id;
+    private Integer idPurchase;
     @Column(name = "id_cliente")
     private String idClient;
     @Column(name = "fecha")
@@ -23,18 +23,20 @@ public class PurchaseEntity {
     private String comment;
     @Column(name = "estado")
     private String state;
-    @ManyToOne()
+
+    @ManyToOne
     @JoinColumn(name = "id_cliente", insertable = false, updatable = false)
     private ClientEntity clientEntity;
+
     @OneToMany(mappedBy = "purchaseEntity", cascade = {CascadeType.ALL})
     private List<ProductPurchaseEntity> products;
 
-    public Integer getId() {
-        return id;
+    public Integer getIdPurchase() {
+        return idPurchase;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdPurchase(Integer idPurchase) {
+        this.idPurchase = idPurchase;
     }
 
     public String getIdClient() {
@@ -98,18 +100,18 @@ public class PurchaseEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PurchaseEntity purchaseEntity = (PurchaseEntity) o;
-        return state == purchaseEntity.state && Objects.equals(id, purchaseEntity.id) && Objects.equals(idClient, purchaseEntity.idClient) && Objects.equals(date, purchaseEntity.date) && Objects.equals(paymentMeans, purchaseEntity.paymentMeans) && Objects.equals(comment, purchaseEntity.comment);
+        return state == purchaseEntity.state && Objects.equals(idPurchase, purchaseEntity.idPurchase) && Objects.equals(idClient, purchaseEntity.idClient) && Objects.equals(date, purchaseEntity.date) && Objects.equals(paymentMeans, purchaseEntity.paymentMeans) && Objects.equals(comment, purchaseEntity.comment);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, idClient, date, paymentMeans, comment, state);
+        return Objects.hash(idPurchase, idClient, date, paymentMeans, comment, state);
     }
 
     @Override
     public String toString() {
         return "Purchase{" +
-                "id=" + id +
+                "id=" + idPurchase +
                 ", idClient='" + idClient + '\'' +
                 ", date=" + date +
                 ", paymentMeans='" + paymentMeans + '\'' +

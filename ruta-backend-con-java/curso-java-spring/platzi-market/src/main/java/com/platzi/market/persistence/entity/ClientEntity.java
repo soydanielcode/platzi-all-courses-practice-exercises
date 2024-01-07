@@ -9,6 +9,7 @@ import java.util.Objects;
 @Table(name = "clientes")
 public class ClientEntity {
     @Id
+    @Column(name = "id")
     private String id;
     @Column(name = "nombre")
     private String name;

@@ -7,18 +7,15 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
-import java.util.List;
-
 @Mapper(componentModel = "spring", uses = {ProductMapper.class})
 public interface PurchaseItemMapper {
     @Mappings({
             @Mapping(source = "id.idProduct", target = "productId"),
             @Mapping(source = "quantity", target = "quantity"),
             @Mapping(source = "total", target = "total"),
-            @Mapping(source = "state", target = "state")
+            @Mapping(source = "state", target = "active")
     })
     PurchaseItem toPurchaseItem(ProductPurchaseEntity purchaseEntity);
-    List<PurchaseItem> toPurchaseItems(List<PurchaseItem> purchaseItems);
 
     @InheritInverseConfiguration()
     @Mappings({
