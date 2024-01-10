@@ -10,11 +10,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Customer {
+public class CustomerEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_customer", nullable = false, length = 15)
-    private Integer idCustomer;
+    private String idCustomer;
 
     @Column(length = 60, nullable = false)
     private String name;

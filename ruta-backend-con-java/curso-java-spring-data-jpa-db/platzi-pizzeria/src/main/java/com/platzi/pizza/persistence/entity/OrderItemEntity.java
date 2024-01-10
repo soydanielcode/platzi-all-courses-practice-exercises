@@ -7,10 +7,11 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "order_item")
+@IdClass(OrderItemId.class)
 @Getter
 @Setter
 @NoArgsConstructor
-public class OrderItem {
+public class OrderItemEntity {
     @Id
     @Column(name = "id_order", nullable = false)
     private Integer idOrder;
@@ -27,4 +28,12 @@ public class OrderItem {
 
     @Column(columnDefinition = "DECIMAL(5,2)", nullable = false)
     private Double price;
+
+    @ManyToOne
+    @JoinColumn(name = "id_order", referencedColumnName = "id_order", insertable = false, updatable = false)
+    private OrderEntity orderEntity;
+
+    @OneToOne
+    @JoinColumn(name = "id_pizza", referencedColumnName = "id_pizza", insertable = false, updatable = false)
+    private PizzaEntity pizzaEntity;
 }
