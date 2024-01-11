@@ -37,6 +37,26 @@ public class PizzaController {
         return ResponseEntity.badRequest().build();
     }
 
+    @GetMapping("/available")
+    public ResponseEntity<List<PizzaEntity>> getAvailable(){
+        return ResponseEntity.ok(service.getAvailable());
+    }
+
+    @GetMapping("/name/{name}")
+    public ResponseEntity<List<PizzaEntity>> getName(@PathVariable String name){
+        return ResponseEntity.ok(service.getName(name));
+    }
+
+    @GetMapping("/with/{ingredient}")
+    public ResponseEntity<List<PizzaEntity>> getWith(@PathVariable String ingredient){
+        return ResponseEntity.ok(service.getWith(ingredient));
+    }
+
+    @GetMapping("/without/{ingredient}")
+    public ResponseEntity<List<PizzaEntity>> getWithout(@PathVariable String ingredient){
+        return ResponseEntity.ok(service.getWithout(ingredient));
+    }
+
     @PutMapping
     public ResponseEntity<PizzaEntity> update(@RequestBody PizzaEntity  pizzaEntity){
         if (pizzaEntity.getIdPizza() != null && service.existId(pizzaEntity.getIdPizza()) ) {
