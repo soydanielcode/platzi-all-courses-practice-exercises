@@ -21,7 +21,9 @@ public class SecurityConfig {
                 .csrf().disable()
                 .cors().and()
                 .authorizeHttpRequests()
-                .requestMatchers(HttpMethod.GET, "/api/*").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/pizzas/**").hasAnyRole("ADMIN","CUSTOMER")
+                .requestMatchers(HttpMethod.GET, "/api/orders/**").hasAnyRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT).hasAnyRole("ADMIN")
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -36,7 +38,12 @@ public class SecurityConfig {
                 .password(passwordEncoder().encode("admin"))
                 .roles("ADMIN")
                 .build();
-        return new InMemoryUserDetailsManager(admin);
+        UserDetails customer = User.builder()
+                .username("customer")
+                .password(passwordEncoder().encode("customer"))
+                .roles("CUSToMER")
+                .build();
+        return new InMemoryUserDetailsManager(admin, customer);
     }
 
     @Bean
