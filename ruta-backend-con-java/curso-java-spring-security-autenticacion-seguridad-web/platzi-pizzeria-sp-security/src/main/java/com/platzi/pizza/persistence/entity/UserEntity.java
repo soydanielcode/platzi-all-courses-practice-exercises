@@ -18,10 +18,10 @@ public class UserEntity {
     private String username;
 
     @Column(nullable = false, length = 200)
-    private  String password;
+    private String password;
 
     @Column(length = 50)
-    private  String mail;
+    private String email;
 
     @Column(nullable = false, columnDefinition = "TINYINT")
     private Boolean locked;
@@ -31,4 +31,16 @@ public class UserEntity {
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<UserRoleEntity> roles;
+
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", locked=" + locked +
+                ", disabled=" + disabled +
+                ", roles=" + roles +
+                '}';
+    }
 }

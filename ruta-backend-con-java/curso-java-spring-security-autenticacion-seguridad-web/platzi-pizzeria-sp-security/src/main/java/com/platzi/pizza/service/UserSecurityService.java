@@ -17,41 +17,50 @@ import java.util.List;
 
 @Service
 public class UserSecurityService implements UserDetailsService {
-    private final UserRepository repository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public UserSecurityService(UserRepository repository) {
-        this.repository = repository;
+    public UserSecurityService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserEntity user = repository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User " + username + " not found"));
-        String[]roles = user.getRoles().stream().map(UserRoleEntity::getRole).toArray(String[]::new);
+        UserEntity userEntity = this.userRepository.findById(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User " + username + " not found."));
+
+        System.out.println(userEntity);
+
+        String[] roles = userEntity.getRoles().stream().map(UserRoleEntity::getRole).toArray(String[]::new);
+
         return User.builder()
-                .username(user.getUsername())
-                .password(user.getPassword())
-                .authorities(grantedAuthorities(roles))
-                .accountLocked(user.getLocked())
-                .disabled(user.getDisabled())
+                .username(userEntity.getUsername())
+                .password(userEntity.getPassword())
+                .authorities(this.grantedAuthorities(roles))
+                .accountLocked(userEntity.getLocked())
+                .disabled(userEntity.getDisabled())
                 .build();
     }
 
     private String[] getAuthorities(String role) {
-        if("ADMIN".equals(role) || "CUSTOMER".equals(role)) {
+        if ("ADMIN".equals(role) || "CUSTOMER".equals(role)) {
             return new String[] {"random_order"};
         }
-        return new String[]{};
+
+        return new String[] {};
     }
 
     private List<GrantedAuthority> grantedAuthorities(String[] roles) {
         List<GrantedAuthority> authorities = new ArrayList<>(roles.length);
-        for (String role: roles){
+
+        for (String role: roles) {
             authorities.add(new SimpleGrantedAuthority("ROLE_" + role));
-            for(String authority: getAuthorities(role)){
+
+            for (String authority: this.getAuthorities(role)) {
                 authorities.add(new SimpleGrantedAuthority(authority));
             }
         }
+
         return authorities;
     }
 }
