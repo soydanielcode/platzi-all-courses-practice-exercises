@@ -22,7 +22,7 @@ public class JwtUtil {
                 .sign(ALGORITHM);
     }
 
-    public boolean idValid(String jwt) {
+    public boolean isValid(String jwt) {
         try {
             JWT.require(ALGORITHM)
                     .build()
